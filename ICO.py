@@ -42,22 +42,16 @@ class ICO:
 
 
 
-        def convert_ico():
+        def Openfile():
             global filename
             file_path = filedialog.askopenfilename(title = "Select file",filetypes = (("png files","*.png"),("all files","*.*"))) 
             filename = file_path
             Lab_select.config(text="file is selected")
             self.root.update()
             return filename
-##            img = Image.open(filename)
-##            icon_sizes = [(128, 128)]
-                      
-            #img.save('logo{}.ico'.format(ra))
-                        
-              
-            
 
-        def save_as():
+
+        def Convert():
             try:
                 
                  Lab_select.config(text="Successfully converted")
@@ -67,11 +61,6 @@ class ICO:
                  imgs=imageio.imwrite('logo{}.ico'.format(ra), img)
             except:
                 pass
-                
-            
-
-
-
 #=======================================================================
         MainFrame=Frame(self.root,width=400,height=200,relief="sunken",bd=3)
         MainFrame.place(x=0,y=0)
@@ -86,20 +75,16 @@ class ICO:
         Lab_select.place(x=140,y=60)
 
 
-        But_load_file=Button(MainFrame,text="Open File only png",command=convert_ico,width=15,font=('times new roman',12,'bold'),bd=3,cursor="hand2")
+        But_load_file=Button(MainFrame,text="Open File only png",command=Openfile,width=15,font=('times new roman',12,'bold'),bd=3,cursor="hand2")
         But_load_file.place(x=30,y=120)
         But_load_file.bind("<Enter>",on_enter1)
         But_load_file.bind("<Leave>",on_leave1)
 
 
-        But_Save_file=Button(MainFrame,text="Convert Ico",command = lambda : save_as(),width=15,font=('times new roman',12,'bold'),bd=3,cursor="hand2")
+        But_Save_file=Button(MainFrame,text="Convert Ico",command = lambda : Convert(),width=15,font=('times new roman',12,'bold'),bd=3,cursor="hand2")
         But_Save_file.place(x=220,y=120)
         But_Save_file.bind("<Enter>",on_enter2)
         But_Save_file.bind("<Leave>",on_leave2)
-
-
-
-
 
 #=======================================================================
 
