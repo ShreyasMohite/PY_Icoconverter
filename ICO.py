@@ -1,7 +1,7 @@
 from tkinter import *
 from PIL import ImageTk
 from PIL import *
-import imageio
+import imageio,os
 import tkinter.filedialog
 from PIL import Image
 from tkinter.filedialog import asksaveasfile 
@@ -17,9 +17,6 @@ class ICO:
         self.root.geometry("400x200")
         self.root.iconbitmap("logos.ico")
         self.root.resizable(0,0)
-
-
-
 
              
         def on_enter1(e):
@@ -46,21 +43,32 @@ class ICO:
 
 
         def convert_ico():
-            file_path = filedialog.askopenfilename(title = "Select file",filetypes = (("jpeg files","*.jpeg"),("jpeg files","*.jpg"),("png files","*.png"),("all files","*.*"))) 
+            global filename
+            file_path = filedialog.askopenfilename(title = "Select file",filetypes = (("png files","*.png"),("all files","*.*"))) 
             filename = file_path
             Lab_select.config(text="file is selected")
             self.root.update()
-            ra=random.randint(1,1111)
-            img = Image.open(filename)
-            icon_sizes = [(128, 128)]
-            img.save('logo{}.ico'.format(ra),sizes=icon_sizes)
+            return filename
+##            img = Image.open(filename)
+##            icon_sizes = [(128, 128)]
+                      
+            #img.save('logo{}.ico'.format(ra))
                         
               
             
 
         def save_as():
-            files = [('ICO', '*.ico')] 
-            file = asksaveasfile(filetypes = files, defaultextension = files)
+            try:
+                
+                 Lab_select.config(text="Successfully converted")
+                 self.root.update()
+                 img = imageio.imread(filename)
+                 ra=random.randint(1,1111)
+                 imgs=imageio.imwrite('logo{}.ico'.format(ra), img)
+            except:
+                pass
+                
+            
 
 
 
@@ -78,13 +86,13 @@ class ICO:
         Lab_select.place(x=140,y=60)
 
 
-        But_load_file=Button(MainFrame,text="Open File",command=convert_ico,width=15,font=('times new roman',12,'bold'),bd=3,cursor="hand2")
+        But_load_file=Button(MainFrame,text="Open File only png",command=convert_ico,width=15,font=('times new roman',12,'bold'),bd=3,cursor="hand2")
         But_load_file.place(x=30,y=120)
         But_load_file.bind("<Enter>",on_enter1)
         But_load_file.bind("<Leave>",on_leave1)
 
 
-        But_Save_file=Button(MainFrame,text="Save File",command = lambda : save_as(),width=15,font=('times new roman',12,'bold'),bd=3,cursor="hand2")
+        But_Save_file=Button(MainFrame,text="Convert Ico",command = lambda : save_as(),width=15,font=('times new roman',12,'bold'),bd=3,cursor="hand2")
         But_Save_file.place(x=220,y=120)
         But_Save_file.bind("<Enter>",on_enter2)
         But_Save_file.bind("<Leave>",on_leave2)
