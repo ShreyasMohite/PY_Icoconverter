@@ -1,7 +1,8 @@
 from tkinter import *
 from PIL import ImageTk
 from PIL import *
-import imageio,os
+import imageio
+import os
 import tkinter.filedialog
 from PIL import Image
 from tkinter.filedialog import asksaveasfile 
